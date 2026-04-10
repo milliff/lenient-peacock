@@ -3,7 +3,9 @@
 ## Cambridge Elements in Indo-Pacific Security 
 
 **Authors:** Aidan Milliff & Paul Staniland
+
 **Contact:** milliff.a@gmail.com  
+
 **Last updated:** 2026
 
 ---
