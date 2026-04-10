@@ -46,6 +46,11 @@ Pre-processed data files are in `data/`. The underlying surveys require institut
 
 ## Reproducing the Figures
 
+**Clone or Download the Repository**
+```bash
+git clone https://github.com/milliff/lenient-peacock/
+```
+
 **Recommended (with renv):**
 
 ```r
