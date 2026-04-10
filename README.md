@@ -54,7 +54,7 @@ git clone https://github.com/milliff/lenient-peacock/
 **Recommended (with renv):**
 
 ```r
-# From the project root (clean/ directory)
+# From the project root
 renv::restore()   # installs locked package versions
 source("main.R")  # produces all 28 figures in results/figs/
 ```
