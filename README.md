@@ -159,3 +159,9 @@ replication-material/
 └── results/
     └── figs/                    # Output: numbered publication figures (populated by main.R)
 ```
+
+---
+
+## Why is it called this?
+
+In order to keep project names unique and memorable, names for my github repositories come from a custom generator. You can use it too if you like. See: https://aidanmilliff.com/post/project-name-generator/
