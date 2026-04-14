@@ -214,21 +214,20 @@ threesource_plot <- ggplot(threesource) + geom_hline(yintercept = .5, color = "d
   geom_smooth(aes(x = Year, y = favorability, color= source), se = F, method = "loess", lwd=1.1, span = .7)  +
   geom_point(aes(x = Year, y = favorability, color= source), pch = 16, alpha = .7) +
   geom_vline(xintercept = as.POSIXct("1962-10-21 UTC"), lty = 2, color = "grey") +
-  geom_text(aes(x = as.POSIXct("1962-06-21 UTC"), y = .15, label = "1962 Sino-Indian War"), color = "grey", angle = 90, size = 2) +
+  geom_text(aes(x = as.POSIXct("1962-06-21 UTC"), y = .15, label = "1962 Sino-Indian War"), color = "grey", angle = 90, size = 3) +
   geom_vline(xintercept = as.POSIXct("1986-04-01 UTC"), lty = 2, color = "grey") +
-  geom_text(aes(x = as.POSIXct("1985-12-01 UTC"), y = .15, label = "Sumdorong Chu Crisis"), color = "grey", angle = 90, size = 2) +
+  geom_text(aes(x = as.POSIXct("1985-12-01 UTC"), y = .15, label = "Sumdorong Chu Crisis"), color = "grey", angle = 90, size = 3) +
   geom_vline(xintercept = as.POSIXct("2013-04-01 UTC"), lty = 2, color = "grey") +
-  geom_text(aes(x = as.POSIXct("2012-12-01 UTC"), y = .15, label = "Dalut Beg Oldi Standoff"), color = "grey", angle = 90, size = 2) +
+  geom_text(aes(x = as.POSIXct("2012-12-01 UTC"), y = .15, label = "Dalut Beg Oldi Standoff"), color = "grey", angle = 90, size = 3) +
   geom_vline(xintercept = as.POSIXct("2017-06-01 UTC"), lty = 2, color = "grey") +
-  geom_text(aes(x = as.POSIXct("2017-02-1 UTC"), y = .15, label = "Doklam Crisis"), color = "grey", angle = 90, size = 2) +
-  theme_bw() + scale_color_ptol() +
+  geom_text(aes(x = as.POSIXct("2017-02-1 UTC"), y = .15, label = "Doklam Crisis"), color = "grey", angle = 90, size = 3) +
+  theme_bw(base_size = 14) + scale_color_ptol() +
   ylim(c(0,1)) +
   labs(title= "Indian Public Attitudes Over Time",
        subtitle = "Combining Three Data Sources (And Sampling Methods)",
        x = "Year",
        y = "% Approving/Favorable",
-       color = "Source",
-       caption = "Gallup: Do you approve or disapprove of the job performance of the leadership of China?\nPew: Do you have a very/somewhat favorable, somewhat/very unfavorable opinion of China? \nIIOPO:Would you rank China as...very good, good, neither good nor bad, or very bad?")
+       color = "Source")
 ggsave(filename = here::here("results/figs/fig3-1.png"),plot = threesource_plot, width = 8, height = 5, units = "in", dpi = "retina")
 
 
@@ -273,7 +272,7 @@ pp_plotframe$cihi <- pp_plotframe$pp + 1.96*pp_plotframe$se
 
 depsang_pp_gallup <- ggplot(pp_plotframe) + geom_pointrange(aes(x = Year, y = pp, ymin = cilo, ymax = cihi),
                                        color = ptol_pal()(2)[2]) + geom_line(aes(x = Year, y = pp), lty = 3, color = ptol_pal()(2)[2]) +
-  theme_bw() + geom_vline(xintercept = as.POSIXct("2013-04-13"), color = "darkgrey", lty = 4) +
+  theme_bw(base_size = 14) + geom_vline(xintercept = as.POSIXct("2013-04-13"), color = "darkgrey", lty = 4) +
   geom_vline(xintercept = as.POSIXct("2013-05-05"), color = "darkgrey", lty = 4) +
   geom_text(aes(x = as.POSIXct("2013-04-23"), angle = 90, y = .2, label = "Depsang Standoff"), color = "darkgrey", size=5) + ylim(c(0,1)) +
   labs(title = "Predicted Probability of Approving of China's Leadership",
@@ -312,7 +311,7 @@ pp_plotframe$cihi <- pp_plotframe$pp + 1.96*pp_plotframe$se
 
 doklam_pp_gallup <- ggplot(pp_plotframe) + geom_pointrange(aes(x = Year, y = pp, ymin = cilo, ymax = cihi),
                                                             color = ptol_pal()(2)[2]) + geom_line(aes(x = Year, y = pp), lty = 3, color = ptol_pal()(2)[2]) +
-  theme_bw() + geom_vline(xintercept = as.POSIXct("2017-06-16"), color = "darkgrey", lty = 4) +
+  theme_bw(base_size = 14) + geom_vline(xintercept = as.POSIXct("2017-06-16"), color = "darkgrey", lty = 4) +
   geom_vline(xintercept = as.POSIXct("2017-08-28"), color = "darkgrey", lty = 4) +
   geom_text(aes(x = as.POSIXct("2017-07-23"), angle = 90, y = .3, label = "Doklam Crisis"), color = "darkgrey", size=5) + ylim(c(0,1)) +
   labs(title = "Predicted Probability of Approving of China's Leadership",
@@ -365,7 +364,7 @@ pp_plotframe$cihi <- pp_plotframe$pp + 1.96*pp_plotframe$se
 
 doklam_pp_pew <- ggplot(pp_plotframe) + geom_pointrange(aes(x = Year, y = pp, ymin = cilo, ymax = cihi),
                                                            color = ptol_pal()(2)[2]) + geom_line(aes(x = Year, y = pp), lty = 3, color = ptol_pal()(2)[2]) +
-  theme_bw() + geom_vline(xintercept = as.POSIXct("2017-06-16"), color = "darkgrey", lty = 4) +
+  theme_bw(base_size = 14) + geom_vline(xintercept = as.POSIXct("2017-06-16"), color = "darkgrey", lty = 4) +
   geom_vline(xintercept = as.POSIXct("2017-08-28"), color = "darkgrey", lty = 4) +
   geom_text(aes(x = as.POSIXct("2017-07-23"), angle = 90, y = .25, label = "Doklam Crisis"), color = "darkgrey", size=5) + ylim(c(0,1)) +
   labs(title = "Predicted Favorability Toward China",
@@ -402,7 +401,7 @@ pp_plotframe$cihi <- pp_plotframe$pp + 1.96*pp_plotframe$se
 
 depsang_pp_pew <- ggplot(pp_plotframe) + geom_pointrange(aes(x = Year, y = pp, ymin = cilo, ymax = cihi),
                                                          color = ptol_pal()(2)[2]) + geom_line(aes(x = Year, y = pp), lty = 3, color = ptol_pal()(2)[2]) +
-  theme_bw() + geom_vline(xintercept = as.POSIXct("2013-04-13"), color = "darkgrey", lty = 4) +
+  theme_bw(base_size = 14) + geom_vline(xintercept = as.POSIXct("2013-04-13"), color = "darkgrey", lty = 4) +
   geom_vline(xintercept = as.POSIXct("2013-05-05"), color = "darkgrey", lty = 4) +
   geom_text(aes(x = as.POSIXct("2013-04-23"), angle = 90, y = .25, label = "Depsang Standoff"), color = "darkgrey", size=5) + ylim(c(0,1)) +
   labs(title = "Predicted Favorability Toward China",
@@ -445,7 +444,7 @@ pp_plotframe$cihi <- pp_plotframe$pp + 1.96*pp_plotframe$se
 
 sumdorong_pp_iipo <- ggplot(pp_plotframe) + geom_pointrange(aes(x = Year, y = pp, ymin = cilo, ymax = cihi),
                                                          color = ptol_pal()(2)[2]) + geom_line(aes(x = Year, y = pp), lty = 3, color = ptol_pal()(2)[2]) +
-  theme_bw() + geom_vline(xintercept = as.POSIXct("1986-10-18"), color = "darkgrey", lty = 4) +
+  theme_bw(base_size = 14) + geom_vline(xintercept = as.POSIXct("1986-10-18"), color = "darkgrey", lty = 4) +
   geom_vline(xintercept = as.POSIXct("1987-05-01"), color = "darkgrey", lty = 4) +
   geom_text(aes(x = as.POSIXct("1987-01-23"), angle = 0, y = .1, label = "Sumdorong Chu\nStandoff"), color = "darkgrey", size=5) + ylim(c(0,1)) +
   labs(title = "Predicted Favorability Toward China",
@@ -656,7 +655,7 @@ big_plot_byparty <- ggplot(big_party_region_plot, aes(x = year, y = pp, group = 
   geom_rect(aes(xmin = as.POSIXct("2014-04-07"), xmax = as.POSIXct("2014-05-16"), ymin = -Inf, ymax = Inf), fill = "darkgrey", lwd = 0, alpha = .05) +
   geom_text(aes(x = as.POSIXct("2014-01-23"), angle = 90, y = .75,
                 label = "2014 Elections"), color = "darkgrey", size=3) +
-  facet_wrap(~region, ncol = 2) + theme_bw() + scale_color_manual(values = c("darkorange2", "chartreuse4")) +
+  facet_wrap(~region, ncol = 2) + theme_bw(base_size = 14) + scale_color_manual(values = c("darkorange2", "chartreuse4")) +
   labs(title = "Predicted Favorability Toward China",
        subtitle = "Disaggregated by Region, Party",
        x = "Year",

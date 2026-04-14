@@ -1,0 +1,6 @@
+data/.Rapp.history
+data/gallup_indf.RData
+data/pew_clean.RData
+.Rhistory
+.DS_Store
+results/.DS_Store

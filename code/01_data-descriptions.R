@@ -84,13 +84,13 @@ survey_table <- survey_table |> mutate(IIPO = as.numeric(IIPO),
                                        Pew = as.numeric(Pew),
                                        Gallup = as.numeric(Gallup))
 
-ggplot(surveys_years) + geom_bar(aes(x = Year, fill = source, group = source, y = n), position = "dodge", stat = "identity") + scale_fill_ptol() + theme_bw() +
+fig2_1 <- ggplot(surveys_years) + geom_bar(aes(x = Year, fill = source, group = source, y = n), position = "dodge", stat = "identity") + scale_fill_ptol() + theme_bw(base_size = 14) +
   labs(title = "Survey Data Coverage by Year",
        subtitle = "Respondent Counts by Survey Data Source",
        x = "Year",
        y = "Respondents",
        fill = "Survey")
-ggsave(filename = here::here("results/figs/fig2-1.png"), width = 7, height = 4, dpi = "retina")
+ggsave(filename = here::here("results/figs/fig2-1.png"), plot = fig2_1, width = 7, height = 4, dpi = "retina")
 
 
 # ── Figure 2-2: IIPO Survey Location Map ──────────────────────────────────────
@@ -140,15 +140,14 @@ timeplot <- ggplot(time_df) + geom_hline(yintercept = .5, color = "darkgrey") +
   geom_smooth(aes(x = YEAR_WAVE, y = approval, color= region), se = F, span = .45, lwd=1.1)  +
   geom_point(aes(x = YEAR_WAVE, y = approval, color= region), pch = 16, alpha = .7) +
   facet_wrap(~country+region, nrow = 3) +
-  theme_bw() + 
+  theme_bw(base_size = 14) +
   scale_color_manual(values = c(ptol_pal()(4), ptol_pal()(5)[2])) + # To get colors/order to match IIOPO
   ylim(c(0,1)) +
   labs(title= "Indian Public Attitudes Over Time",
        subtitle = "Gallup Survey Data across 12 waves",
        x = "Year",
        y = "% Approval (Leadership)",
-       color = "Region",
-       caption = "Question Text:\nDo you approve or disapprove of the job performance of the leadership of China...Russia...The United States?")
+       color = "Region")
 ggsave(filename = here::here("results/figs/fig2-6a.png"), timeplot, width = 8, height = 5, dpi = "retina")
 
 
@@ -173,15 +172,14 @@ timeplot <- ggplot(time_df) + geom_hline(yintercept = .5, color = "darkgrey") +
   geom_smooth(aes(x = YEAR, y = approval, color= region), se = F, span = .45, lwd=1.1)  +
   geom_point(aes(x = YEAR, y = approval, color= region), pch = 16, alpha = .7) +
   facet_wrap(~country+region, nrow = 3) +
-  theme_bw() + 
+  theme_bw(base_size = 14) +
   scale_color_manual(values = c(ptol_pal()(4), ptol_pal()(5)[2])) + # To get colors/order to match IIOPO
   ylim(c(0,1)) +
   labs(title= "Indian Public Attitudes Over Time",
        subtitle = "Pew Survey Data across 13 waves",
        x = "Year",
        y = "% Approval",
-       color = "Region",
-       caption = "Question Text:\nPlease tell me if you have a very favorable, somewhat favorable,\nsomewhat unfavorable, or very unfavorable opinion of China...Russia...The United States")
+       color = "Region")
 ggsave(filename = here::here("results/figs/fig2-6b.png"), timeplot, width = 8, height = 5, dpi = "retina")
 
 
@@ -519,7 +517,7 @@ timeplot <- ggplot(time_df_3country) + geom_hline(yintercept = 0, color = "darkg
   geom_smooth(aes(x = year, y = approval, color= city), se = F, span = .2, lwd=1.1)  +
   geom_point(aes(x = year, y = approval, color= city), pch = 20, alpha = .7) +
   facet_wrap(~country+city, nrow = 3) +
-  theme_bw() + scale_color_ptol() + ylim(c(-2,3)) +
+  theme_bw(base_size = 14) + scale_color_ptol() + ylim(c(-2,3)) +
   scale_y_continuous(breaks = c(-2,-1,0,1,2,3),
                      labels =  c("Very Bad", "Bad", "Neither\nGood nor Bad", "Good", "Very Good", "X")) +
   scale_x_continuous(breaks = c(1980, 1990, 2000)) +
@@ -527,9 +525,8 @@ timeplot <- ggplot(time_df_3country) + geom_hline(yintercept = 0, color = "darkg
        subtitle = "IIOPO Survey Data across 40 waves",
        x = "Year",
        y = "Average Attitude",
-       color = "City",
-       caption = "Question Text:\nPlease give me your opinion of the countries listed on this card. First, take China.\nWould you rank China as...very good, good, neither good nor bad, or very bad?\n How about ...  The USSR, The United States, etc.")
-ggsave(filename = here::here("results/figs/fig2-5.png"), width = 8, height = 5, dpi = "retina")
+       color = "City")
+ggsave(filename = here::here("results/figs/fig2-5.png"), plot = timeplot, width = 8, height = 5, dpi = "retina")
 
 
 # Pre-Microdata -----------------------------------------------------------
@@ -552,17 +549,16 @@ timeplot_natl <- ggplot(time_df_natl) + geom_hline(yintercept = 0, color = "dark
   geom_smooth(aes(x = year, y = approval), se = F, span = .2, lwd=1.1)  +
   geom_point(aes(x = year, y = approval), pch = 20, alpha = .7) +
   geom_vline(xintercept = as.POSIXct("1975-01-01 UTC"), lty = 2, color = "grey") +
-  geom_text(aes(x = as.POSIXct("1974-09-01 UTC"), y = -1.27, label = "Microdata Available"), color = "grey", angle = 90, size = 2.2) +
+  geom_text(aes(x = as.POSIXct("1974-09-01 UTC"), y = -1.27, label = "Microdata Available"), color = "grey", angle = 90, size = 3) +
   facet_wrap(~country, nrow = 3) +
-  theme_bw() + scale_color_ptol() + ylim(c(-2,3)) +
+  theme_bw(base_size = 14) + scale_color_ptol() + ylim(c(-2,3)) +
   scale_y_continuous(breaks = c(-2,-1,0,1,2,3),
                      labels =  c("Very Bad", "Bad", "Neither\nGood nor Bad", "Good", "Very Good", "X")) +
   labs(title= "Indian (Urban) Public Attitudes Over Time",
        subtitle = "IIOPO Survey Data across 42 Years",
        x = "Year",
-       y = "Average Attitude",
-       caption = "Question Text:\nPlease give me your opinion of the countries listed on this card. First, take China.\nWould you rank China as...very good, good, neither good nor bad, or very bad?\n How about ...  The USSR, The United States, etc.")
-ggsave(filename = here::here("results/figs/fig2-4.png"), width = 8, height =5, dpi = "retina")
+       y = "Average Attitude")
+ggsave(filename = here::here("results/figs/fig2-4.png"), plot = timeplot_natl, width = 8, height =5, dpi = "retina")
  
 
 
@@ -592,14 +588,14 @@ points <- cbind.data.frame(labels = c("Do you approve or disapprove of the job\n
                            x      = c(0.5533370, 0.2893682833, 0.1058611254, 0.0160407661),
                            y      = rep(15, times = 4))
 
-ggplot(dfna[which(dfna$prop_na > 0.0000),]) + geom_density(aes(prop_na), color = "darkgrey", fill = "darkgrey") +
-  theme_minimal() + geom_vline(xintercept = points$x, color = "navy", data = points) +
+fig2_7 <- ggplot(dfna[which(dfna$prop_na > 0.0000),]) + geom_density(aes(prop_na), color = "darkgrey", fill = "darkgrey") +
+  theme_minimal(base_size = 14) + geom_vline(xintercept = points$x, color = "navy", data = points) +
   geom_text(data=points, aes(x = x, y = y, label = labels), color = "navy", angle = 90, size = 4) +
   labs(title = "Distribution of DK Rates across FP Questions",
        subtitle = "Pooled Gallup World Poll Survey of Indian Foreign Policy Opinion",
        x = "Proportion of DK responses",
        y = "Density")
-ggsave(filename = here::here("results/figs/fig2-7.png"), width=7, height=7, dpi = "retina")
+ggsave(filename = here::here("results/figs/fig2-7.png"), plot = fig2_7, width=7, height=7, dpi = "retina")
 
 # Modeling DK/NA ---------------------------------------------------------
 na_mod <- lm_robust(DK_count ~ urban +  hh_income_localcurrency +
@@ -647,14 +643,14 @@ dk_byregion <- ggplot(dk_plots, aes(x = ses, y = pp, group = region, color = reg
   geom_errorbar(aes(ymin=cilo, ymax=cihi), width = .1) +
   geom_point(aes(y = pp, x = ses, color = region), pch = 20) + 
   geom_line(lty = 2, alpha= .5) +
-  facet_wrap(~region, ncol = 2) + theme_bw() + scale_color_ptol() +
+  facet_wrap(~region, ncol = 2) + theme_bw(base_size = 14) + scale_color_ptol() +
   labs(title = "Predicted Count of Don't Know Answers",
        subtitle = "Disaggregated by Region, SES",
        x = "SES",
        y = "DK Count",
        color = "Region",
-       caption = "Low SES: Elementary ducation, 1st quartile HH income, Rural resident\nHigh SES: College education, 4th quartile HH income, Urban resident")
-ggsave(filename = here::here("results/figs/fig2-8.png"), width = 8, height = 5, dpi = "retina")
+       caption = "Low SES: Elementary education, 1st quartile HH income, Rural resident\nHigh SES: College education, 4th quartile HH income, Urban resident")
+ggsave(filename = here::here("results/figs/fig2-8.png"), plot = dk_byregion, width = 8, height = 5, dpi = "retina")
 
 
 

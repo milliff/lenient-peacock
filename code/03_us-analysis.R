@@ -1,7 +1,7 @@
 # --------------------------------------------
 #
-# Author: Aidan Milliff
-# Copyright (c) Aidan Milliff, 2024
+# Author: Aidan Milliff and Paul Staniland
+# Copyright (c) Aidan Milliff, 2026
 # Email:  milliff.a@gmail.com
 #
 # Script Name: 03_us-analysis.R
@@ -135,14 +135,13 @@ timeplot_natl <- ggplot(time_df_long_us) + geom_hline(yintercept = 0, color = "d
   geom_text(aes(x = as.POSIXct("1971-05-18 UTC"), y = -1.27, label = "USS Enterprise"), color = "grey", angle = 90, size = 4) +
   geom_vline(xintercept = as.POSIXct("1975-01-01 UTC"), lty = 2, color = "grey") +
   geom_text(aes(x = as.POSIXct("1974-06-01 UTC"), y = -1.27, label = "Microdata Available"), color = "grey", angle = 90, size = 4) +
-  theme_bw() + scale_color_ptol() + ylim(c(-2,3)) +
+  theme_bw(base_size = 14) + scale_color_ptol() + ylim(c(-2,3)) +
   scale_y_continuous(breaks = c(-2,-1,0,1,2,3),
                      labels =  c("Very Bad", "Bad", "Neither\nGood nor Bad", "Good", "Very Good", "X"), limits = c(-2,2)) +
   labs(title= "Indian (Urban) Public Attitudes Over Time",
        subtitle = "IIOPO Survey Data across 42 Years",
        x = "Year",
-       y = "Average Attitude",
-       caption = "Question Text:\nPlease give me your opinion of the countries listed on this card. How about the United States.\nWould you rank the USA as...very good, good, neither good nor bad, or very bad?")
+       y = "Average Attitude")
 ggsave(filename = here::here("results/figs/fig4-1.png"),plot = timeplot_natl, width = 8, height = 5, units = "in", dpi = "retina")
 
 # Pew, Gallup OT Plots ----------------------------------------------------
@@ -201,14 +200,13 @@ pew_gallup_plot <- rbind.data.frame(time_df_natl_pew, time_df_natl_us)
 pew_gallup <- ggplot(pew_gallup_plot) + geom_hline(yintercept = .5, color = "darkgrey") +
   geom_smooth(aes(x = YEAR, y = approval, color= source), se = F, span = .8, lwd=1.1)  +
   geom_point(aes(x = YEAR, y = approval, color= source), pch = 16, alpha = .7) +
-  theme_bw() + scale_color_ptol() +
+  theme_bw(base_size = 14) + scale_color_ptol() +
   ylim(c(0,1)) +
   labs(title= "Indian Public Attitudes Over Time",
        subtitle = "Pew and Gallup Data from the 21st Century",
        x = "Year",
        y = "% Approving/Favorable",
-       color = "Source",
-       caption = "Gallup: Do you approve or disapprove of the job performance of the leadership of the United States?\nPew: Please tell me if you have a very favorable, somewhat favorable,\nsomewhat unfavorable, or very unfavorable opinion of the United States")
+       color = "Source")
 ggsave(filename = here::here("results/figs/fig4-2.png"),plot = pew_gallup, width = 8, height = 5, units = "in", dpi = "retina")
 
 
@@ -391,7 +389,7 @@ big_plot_byregion <- ggplot(big_party_region_plot, aes(x = year, y = pp, group =
   geom_rect(aes(xmin = as.POSIXct("2014-04-07"), xmax = as.POSIXct("2014-05-16"), ymin = -Inf, ymax = Inf), fill = "darkgrey", lwd = 0, alpha = .05) +
   geom_text(aes(x = as.POSIXct("2014-01-23"), angle = 90, y = .25,
                 label = "2014 Elections"), color = "darkgrey", size=4) +
-  facet_wrap(~party, ncol = 2) + theme_bw() + scale_color_ptol() +
+  facet_wrap(~party, ncol = 2) + theme_bw(base_size = 14) + scale_color_ptol() +
   labs(title = "Predicted Favorability Toward USA",
        subtitle = "Disaggregated by Region, Party",
        x = "Year",

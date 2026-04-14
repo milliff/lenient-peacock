@@ -1,7 +1,7 @@
 # --------------------------------------------
 #
-# Author: Aidan Milliff
-# Copyright (c) Aidan Milliff, 2024
+# Author: Aidan Milliff and Paul Staniland
+# Copyright (c) Aidan Milliff, 2026
 # Email:  milliff.a@gmail.com
 #
 # Script Name: main.R
@@ -25,6 +25,15 @@ cat("==============================================\n")
 cat("  Replication Archive: India Public Opinion   \n")
 cat("  Cambridge Elements                          \n")
 cat("==============================================\n\n")
+
+# -----------------------------------------------------------------------
+# DATA CONSTRUCTION (skip if using pre-built .RData files in data/)
+# If you have obtained the raw Gallup and Pew data files, set the paths
+# in the scripts below and un-comment to rebuild from source.
+# See README.md for instructions on obtaining the raw data.
+# -----------------------------------------------------------------------
+# source(here::here("code/00_build-gallup-indf.R"))
+# source(here::here("code/00_clean-pew.R"))
 
 # Part 2: Data descriptions and survey coverage maps
 cat("Running 01_data-descriptions.R (fig2-1 through fig2-8)...\n")

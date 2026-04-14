@@ -33,14 +33,40 @@ Pre-processed data files are in `data/`. The underlying surveys require institut
 | File | Description | Source |
 |------|-------------|--------|
 | `IND_ADM1.geojson` | Indian state boundaries shapefile (for survey location maps) | [datameet/maps](https://github.com/datameet/maps) |
-| `gallup_indf.RData` | Gallup World Poll, India, 12 waves (2006–2019) — analysis variables only | Gallup Organization |
-| `pew_clean.RData` | Pew Global Attitudes, India, 13 waves (2002–2019) | Pew Research Center |
+| `gallup_indf.RData` | Gallup World Poll, India, 12 waves (2006–2019) — analysis variables only. **Cannot be redistributed.** To rebuild from raw data, see `code/00_build-gallup-indf.R` and *Obtaining Restricted Data* below. | Gallup Organization |
+| `pew_clean.RData` | Pew Global Attitudes, India, 13 waves (2002–2019). **Cannot be redistributed.** To rebuild from raw data, see `code/00_clean-pew.R` and *Obtaining Restricted Data* below. | Pew Research Center |
 | `roper_allyears.RData` | Indian Institute of Public Opinion (IIPO/IIOPO) microdata, 40 waves (1974–2001) | Roper Center for Public Opinion Research |
 | `dk_rates.csv` | Pre-computed "Don't Know" response rates per survey question (summary only) | Derived from Gallup |
 | `iiopo-59-88.xlsx` | IIOPO topline aggregates, 1959–1988 (pre-microdata) | Roper Center |
 | `pew_over_time.xlsx` | Pew longitudinal favorability aggregates | Pew Research Center |
 | `pew_1618_states.RData` | Pew 2016–2018 state identifiers (for maps) | Pew Research Center |
 | `pew_0709_cities.RData` | Pew 2007–2009 city identifiers (for maps) | Pew Research Center |
+
+---
+
+## Obtaining Restricted Data
+
+Two datasets require institutional access and cannot be included in this archive. Construction scripts are provided so that researchers who obtain the raw data can rebuild the `.RData` files used by the analysis scripts.
+
+### Gallup World Poll (`gallup_indf.RData`)
+
+**Source:** Gallup Organization  
+**What to request:** Gallup World Poll microdata for India, waves 2006–2019 (March 2019 release: `The_Gallup_032219.dta`). Academic data-sharing arrangements are available through the [Gallup Analytics portal](https://www.gallup.com/analytics/318923/world-poll-public-datasets.aspx) or via a direct data-sharing agreement with Gallup.
+
+**To rebuild:**
+1. Obtain `The_Gallup_032219.dta` (or the South Asia subset `South Asia Subdata.dta`)
+2. Open `code/00_build-gallup-indf.R` and set `raw_data_path` to your file's location
+3. Un-comment and run the corresponding line in `main.R`
+
+### Pew Global Attitudes (`pew_clean.RData`)
+
+**Source:** Pew Research Center  
+**What to request:** Pew Global Attitudes Survey SPSS (`.sav`) files for India-inclusive waves: 2002, 2004, 2005, 2007, 2008, 2009, 2010, 2011, 2012, 2014, 2015, 2016, 2017, 2018. Files are freely available from the [Pew Research Center data archive](https://www.pewresearch.org/global/datasets/) after registration.
+
+**To rebuild:**
+1. Download the relevant `.sav` files and place them in a single directory
+2. Open `code/00_clean-pew.R` and set `raw_data_path` to that directory
+3. Un-comment and run the corresponding line in `main.R`
 
 ---
 
@@ -121,6 +147,8 @@ replication-material/
 ├── README.md                    # This file
 ├── main.R                       # Master run script
 ├── code/
+│   ├── 00_build-gallup-indf.R   # Rebuilds gallup_indf.RData from raw GWP data
+│   ├── 00_clean-pew.R           # Rebuilds pew_clean.RData from raw Pew data
 │   ├── 01_data-descriptions.R   # Part 2: survey coverage and descriptive plots
 │   ├── 02_china-analysis.R      # Part 3: China approval analysis
 │   ├── 03_us-analysis.R         # Part 4: U.S. approval analysis
