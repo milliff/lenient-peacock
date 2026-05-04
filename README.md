@@ -14,6 +14,13 @@
 
 This archive contains all data and code necessary to reproduce the numbered figures in the *Element*. Running `main.R` from the project root will reproduce all 28 figures and write them to `results/figs/`.
 
+## Extras
+
+In addition to replication data/code, the repository contains two resources for other researchers interested in historical surveys from the _India Institute of Public Opinion._ 
+
+1. `roper_ascii_read.R` contains code that can be adapted to read IIOPO data, which comes in ASCII/punchcard format from the Roper Center.
+2. `IIOPO_FP_Categories.docx` and `IIOPO_FP_Questions.xlsx` contain an index of ALL foreign policy questions, by topic, asked on IIOPO surveys between 1956 and 1988. 
+
 ---
 
 ## Requirements
